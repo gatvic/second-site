@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заметки любителя</title>
+</head>
+<body>
+  <h1>Первые заметки</h1>
+  <a href="{% url 'add' %}">Добавить заметку</a>
+  <div>
+    <a href="{% url 'index' %}">Главная</a>
+    {% for category in categories %}
+    <a href="{% url 'by_category' category.pk %}">{{ category.name }}</a>
+    {% endfor %}
+  </div>
+  {% for post in posts %}
+  <div>
+    <h2>{{post.title}}</h2>
+    <p>{{post.text}}</p>
+    <p>{{post.author}}</p>
+    {% comment %}
+    <p><a href="{% url 'by_category' category.pk %}">{{post.category.name}}</a></p>
+    {% endcomment %}
+    <p>{{post.published_date|date:'d.m.Y H:i:s'}}</p>
+  </div>
+  {% endfor %}
+</body>
+</html>
